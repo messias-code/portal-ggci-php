@@ -1,45 +1,30 @@
 <?php
-// 1. Iniciamos a "memória" de segurança do PHP
-session_start(); 
+session_start();
+require 'config.php';
 
-header('Content-Type: application/json');
+$input = json_decode(file_get_contents('php://input'), true);
+$usuario = $input['usuario'] ?? '';
+$senha = $input['senha'] ?? '';
 
-$dados = json_decode(file_get_contents('php://input'), true);
+// Auto-completa o domínio se o usuário não digitar
+if (!str_contains($usuario, '@')) { $usuario .= '@ovg.org.br'; }
 
-$usuario_digitado = $dados['usuario'] ?? '';
-$senha_digitada = $dados['senha'] ?? '';
+$stmt = $pdo->prepare("SELECT * FROM usuarios WHERE usuario = ?");
+$stmt->execute([$usuario]);
+$user = $stmt->fetch();
 
-// 2. Nosso "Banco de Dados" temporário com Níveis de Acesso (Perfis)
-$usuarios_validos = [
-    'ggci.user' => [
-        'senha' => 'ggci.pwd',
-        'perfil' => 'comum',
-        'nome' => 'Usuário de Consulta'
-    ],
-    'admin' => [
-        'senha' => '4dmin_0VG',
-        'perfil' => 'administrador',
-        'nome' => 'Administrador Geral'
-    ]
-];
-
-// 3. Verificamos se o usuário existe no array E se a senha digitada bate com a salva
-if (array_key_exists($usuario_digitado, $usuarios_validos) && $usuarios_validos[$usuario_digitado]['senha'] === $senha_digitada) {
-    
-    // 4. Se acertou, salvamos quem ele é na Sessão do servidor para usar nas outras páginas
+if ($user && password_verify($senha, $user['senha'])) {
     $_SESSION['logado'] = true;
-    $_SESSION['usuario'] = $usuario_digitado;
-    $_SESSION['perfil'] = $usuarios_validos[$usuario_digitado]['perfil'];
-    $_SESSION['nome'] = $usuarios_validos[$usuario_digitado]['nome'];
-
-    // Damos o sinal verde para o JavaScript liberar a catraca
+    $_SESSION['id'] = $user['id'];
+    $_SESSION['nome'] = $user['nome'];
+    $_SESSION['perfil'] = $user['perfil'];
+    // Salva as permissões para usar no painel.php
+    $_SESSION['p'] = [
+        'senha' => $user['p_senha'],
+        'gestao' => $user['p_gestao'],
+        'ferramentas' => $user['p_ferramentas']
+    ];
     echo json_encode(['sucesso' => true]);
-
 } else {
-    // Se errou a senha ou o usuário não existe, barramos
-    echo json_encode([
-        'sucesso' => false,
-        'mensagem' => 'Credenciais inválidas. Verifique usuário e senha.'
-    ]);
+    echo json_encode(['sucesso' => false, 'mensagem' => 'Usuário ou senha incorretos.']);
 }
-?>
