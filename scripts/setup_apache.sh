@@ -14,14 +14,20 @@ echo "🧹 Limpando o diretório /var/www/html..."
 sudo rm -rf /var/www/html/*
 
 echo "📂 Copiando o projeto de $RAIZ_PROJETO para o Apache..."
-# Remove a pasta de destino caso exista, para evitar que o cp crie subpastas erradas
+# Remove a pasta de destino caso exista, para evitar conflitos
 sudo rm -rf /var/www/html/portal-ggci
 # Copia o repositório inteiro para o local final com o nome exato esperado
 sudo cp -r "$RAIZ_PROJETO" /var/www/html/portal-ggci
 
-echo "🔑 Ajustando permissões de usuário para $USER..."
-sudo chown -R $USER:$USER /var/www/html
-sudo chmod -R 755 /var/www/html
+# 2. Ajusta as permissões de forma universal e segura
+# Pega o usuário real que chamou o script (mesmo se usou sudo, ex: labs)
+USUARIO_REAL=${SUDO_USER:-$USER}
+
+echo "🔑 Ajustando permissões para o usuário $USUARIO_REAL e o Apache (www-data)..."
+# Dono = usuário real / Grupo = Apache
+sudo chown -R $USUARIO_REAL:www-data /var/www/html
+# 775 garante que tanto o dono quanto o Apache possam ler, executar e GRAVAR (essencial para o auto-backup)
+sudo chmod -R 775 /var/www/html
 
 echo "🔄 Reiniciando o Apache..."
 sudo systemctl restart apache2
