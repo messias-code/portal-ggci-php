@@ -48,10 +48,8 @@ try {
         $email = ($_POST['email_gerado'] ?? '') . '@ovg.org.br';
         $senha_gerada = $_POST['senha_gerada'] ?? '';
 
-        // CORREÇÃO MESTRA: Usar !empty() garante que variáveis vazias do JS não passem despercebidas
+        // CORREÇÃO: Removidas colunas antigas e mapeadas as novas
         $perfil = !empty($_POST['promover_admin']) ? 'administrador' : 'comum';
-        $p_gestao = !empty($_POST['promover_admin']) ? 1 : 0;
-        $p_senha = 1;
         $p_ferramentas = !empty($_POST['p_ferramentas']) ? 1 : 0;
         $p_documentacoes = !empty($_POST['p_documentacoes']) ? 1 : 0;
         $p_dashboards = !empty($_POST['p_dashboards']) ? 1 : 0;
@@ -64,10 +62,13 @@ try {
                 exit;
             }
 
-            $hash = password_hash($senha_gerada, PASSWORD_BCRYPT);
-            $sql = "INSERT INTO usuarios (nome, sobrenome, usuario, senha, perfil, p_senha, p_gestao, p_ferramentas, p_documentacoes, p_dashboards) 
-                    VALUES (?, '', ?, ?, ?, ?, ?, ?, ?, ?)";
-            $pdo->prepare($sql)->execute([$nome_completo, $email, $hash, $perfil, $p_senha, $p_gestao, $p_ferramentas, $p_documentacoes, $p_dashboards]);
+            // CORREÇÃO: HASH ARGON2ID ao invés de BCRYPT
+            $hash = password_hash($senha_gerada, PASSWORD_ARGON2ID);
+            
+            // CORREÇÃO: Colunas corretas do INSERT
+            $sql = "INSERT INTO usuarios (nome, usuario, senha, perfil, p_ferramentas, p_documentacoes, p_dashboards) 
+                    VALUES (?, ?, ?, ?, ?, ?, ?)";
+            $pdo->prepare($sql)->execute([$nome_completo, $email, $hash, $perfil, $p_ferramentas, $p_documentacoes, $p_dashboards]);
             
             @atualizar_backup_sql($pdo);
             $resposta = ['sucesso' => true, 'mensagem' => 'Usuário cadastrado com sucesso!'];
@@ -89,17 +90,18 @@ try {
                 $alterar_nome = false;
                 $resetar_senha = false;
                 if ($emailAtual === 'admin@ovg.org.br') {
-                    $perfil = 'administrador'; $p_gestao = 1;
+                    $perfil = 'administrador';
                 } else {
-                    $perfil = 'comum'; $p_gestao = 0;
+                    $perfil = 'comum';
                 }
             } else {
                 $alterar_nome = !empty($_POST['alterar_nome']);
                 $resetar_senha = !empty($_POST['resetar_senha']);
             }
             
-            $colunas = ["perfil = ?", "p_gestao = ?", "p_ferramentas = ?", "p_documentacoes = ?", "p_dashboards = ?"];
-            $parametros = [$perfil, $p_gestao, $p_ferramentas, $p_documentacoes, $p_dashboards];
+            // CORREÇÃO: Colunas corretas do UPDATE
+            $colunas = ["perfil = ?", "p_ferramentas = ?", "p_documentacoes = ?", "p_dashboards = ?"];
+            $parametros = [$perfil, $p_ferramentas, $p_documentacoes, $p_dashboards];
             
             if ($alterar_nome) {
                 $colunas[] = "nome = ?";
@@ -109,12 +111,13 @@ try {
             }
             
             if ($resetar_senha) {
-                if ($emailAtual === 'admin@ovg.org.br') { $senhaParaSalvar = '4dmin_0VG'; } 
-                elseif ($emailAtual === 'ggci@ovg.org.br') { $senhaParaSalvar = 'ggci@ovg'; } 
+                // CORREÇÃO: Senhas padrões atualizadas para as novas que você definiu
+                if ($emailAtual === 'admin@ovg.org.br') { $senhaParaSalvar = '4dmin_0VG@2026'; } 
+                elseif ($emailAtual === 'ggci@ovg.org.br') { $senhaParaSalvar = 'ggci@2026'; } 
                 else { $senhaParaSalvar = $senha_gerada; }
 
                 $colunas[] = "senha = ?";
-                $parametros[] = password_hash($senhaParaSalvar, PASSWORD_BCRYPT);
+                $parametros[] = password_hash($senhaParaSalvar, PASSWORD_ARGON2ID);
             }
             
             $parametros[] = $id;
