@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-// TRAVA DE SEGURANÇA: Agora redireciona para inicio.php
+// TRAVA DE SEGURANÇA: Redireciona para inicio.php
 if (!isset($_SESSION['logado']) || $_SESSION['logado'] !== true || $_SESSION['perfil'] !== 'administrador') {
     header('Location: inicio.php');
     exit;
@@ -17,6 +17,7 @@ $is_master_admin = ($email_logado === 'admin@ovg.org.br');
 
 $nome_usuario = $_SESSION['nome'] ?? 'Administrador';
 
+// A consulta já traz em ordem alfabética do banco de dados
 $stmt = $pdo->query("SELECT * FROM usuarios ORDER BY nome ASC");
 $lista_usuarios = $stmt->fetchAll();
 ?>
@@ -42,6 +43,9 @@ $lista_usuarios = $stmt->fetchAll();
         .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
         .custom-scrollbar::-webkit-scrollbar-thumb { background: rgba(168, 85, 247, 0.4); border-radius: 10px; }
         .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: rgba(168, 85, 247, 0.8); }
+        
+        table { border-collapse: separate; border-spacing: 0; }
+        tbody tr { background-color: transparent; }
     </style>
 </head>
 
@@ -88,23 +92,26 @@ $lista_usuarios = $stmt->fetchAll();
                     <h2 class="text-3xl font-extrabold text-gray-800 tracking-tight">Gestão de Acessos</h2>
                     <p class="text-lg text-gray-500 font-medium mt-1">Controle de permissões e usuários</p>
                 </div>
+                <a href="inicio.php" class="px-5 py-2.5 bg-white border border-purple-100 text-gray-600 hover:text-purple-600 hover:bg-purple-50 rounded-xl font-bold shadow-sm transition-all flex items-center gap-2">
+                    <i class="fa-solid fa-arrow-left"></i> Voltar
+                </a>
             </header>
 
             <div class="flex-1 p-10 flex flex-col gap-6 overflow-y-auto custom-scrollbar">
                 <div class="flex flex-col md:flex-row justify-between items-center gap-4 bg-white/40 backdrop-blur-md border border-white/50 p-4 rounded-2xl shadow-sm">
                     <div class="relative w-full md:w-96">
                         <i class="fa-solid fa-search absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"></i>
-                        <input type="text" placeholder="Buscar por nome, login ou email..." class="w-full pl-11 pr-4 py-3 bg-white/60 border border-purple-100 rounded-xl text-sm focus:ring-2 focus:ring-purple-400 outline-none transition-all placeholder-gray-500">
+                        <input type="text" id="inputBusca" placeholder="Buscar por nome, login ou email..." class="w-full pl-11 pr-4 py-3 bg-white/60 border border-purple-100 rounded-xl text-sm focus:ring-2 focus:ring-purple-400 outline-none transition-all placeholder-gray-500">
                     </div>
                     <button onclick="abrirModalNovo()" class="w-full md:w-auto px-6 py-3 bg-gradient-to-r from-pink-500 to-purple-500 text-white font-bold rounded-xl shadow-lg shadow-pink-500/30 hover:scale-[1.03] transition-all flex items-center justify-center gap-2">
                         <i class="fa-solid fa-user-plus"></i> Novo Usuário
                     </button>
                 </div>
 
-                <div class="bg-white/40 backdrop-blur-md border border-white/50 rounded-2xl shadow-sm overflow-hidden flex-1">
+                <div class="bg-white/40 backdrop-blur-md border border-white/50 rounded-2xl shadow-sm overflow-hidden flex-1 relative">
                     <div class="overflow-x-auto h-full">
                         <table class="w-full text-sm text-left text-gray-600">
-                            <thead class="text-xs uppercase bg-white/50 border-b border-purple-100 text-purple-700">
+                            <thead class="text-xs uppercase bg-white/50 border-b border-purple-100 text-purple-700 relative z-20">
                                 <tr>
                                     <th class="px-6 py-5 font-bold">ID</th>
                                     <th class="px-6 py-5 font-bold">Nome</th>
@@ -114,7 +121,7 @@ $lista_usuarios = $stmt->fetchAll();
                                     <th class="px-6 py-5 font-bold text-center">Ações</th>
                                 </tr>
                             </thead>
-                            <tbody class="divide-y divide-purple-100/50">
+                            <tbody id="tabelaUsuarios" class="divide-y divide-purple-100/50 relative">
                                 <?php if(count($lista_usuarios) > 0): ?>
                                     <?php foreach ($lista_usuarios as $u): 
                                         $is_target_master = in_array($u['usuario'], ['admin@ovg.org.br', 'ggci@ovg.org.br']);
@@ -141,8 +148,12 @@ $lista_usuarios = $stmt->fetchAll();
                                             'p_dashboards' => $u['p_dashboards']
                                         ]), ENT_QUOTES, 'UTF-8');
                                     ?>
-                                    <tr class="hover:bg-white/60 transition-colors">
-                                        <td class="px-6 py-4 font-bold"><?= $u['id'] ?></td>
+                                    
+                                    <tr class="group hover:bg-white/80 relative rounded-xl transition-colors duration-300">
+                                        <td class="px-6 py-4 font-bold relative">
+                                            <div class="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-0 bg-purple-500 group-hover:h-3/4 rounded-r-md transition-all duration-300"></div>
+                                            <?= $u['id'] ?>
+                                        </td>
                                         <td class="px-6 py-4 font-semibold capitalize"><?= htmlspecialchars(trim($u['nome'])) ?></td>
                                         <td class="px-6 py-4"><?= $username_only ?></td>
                                         <td class="px-6 py-4"><?= htmlspecialchars($u['usuario']) ?></td>
@@ -154,21 +165,21 @@ $lista_usuarios = $stmt->fetchAll();
                                         <td class="px-6 py-4 flex justify-center gap-2">
                                             
                                             <?php if($can_edit): ?>
-                                                <button onclick="abrirModalEdicao(<?= $dadosJson ?>)" class="w-9 h-9 rounded-xl bg-amber-100 text-amber-600 hover:bg-amber-500 hover:text-white transition-all flex items-center justify-center" title="Editar Usuário">
+                                                <button onclick="abrirModalEdicao(<?= $dadosJson ?>)" class="w-9 h-9 rounded-xl bg-amber-100 text-amber-600 hover:bg-amber-500 hover:text-white transition-all flex items-center justify-center shadow-sm" title="Editar Usuário">
                                                     <i class="fa-solid fa-pen text-sm"></i>
                                                 </button>
                                             <?php else: ?>
-                                                <button class="w-9 h-9 rounded-xl bg-gray-100 text-gray-400 border border-gray-200 cursor-not-allowed flex items-center justify-center" title="Acesso Restrito">
+                                                <button class="w-9 h-9 rounded-xl bg-gray-100 text-gray-400 border border-gray-200 cursor-not-allowed flex items-center justify-center shadow-sm" title="Acesso Restrito">
                                                     <i class="fa-solid fa-lock text-sm"></i>
                                                 </button>
                                             <?php endif; ?>
                                             
                                             <?php if($can_delete): ?>
-                                                <button onclick="abrirModalExclusao(<?= $u['id'] ?>, '<?= $username_only ?>')" class="w-9 h-9 rounded-xl bg-red-100 text-red-600 hover:bg-red-500 hover:text-white transition-all flex items-center justify-center" title="Excluir Usuário">
+                                                <button onclick="abrirModalExclusao(<?= $u['id'] ?>, '<?= $username_only ?>')" class="w-9 h-9 rounded-xl bg-red-100 text-red-600 hover:bg-red-500 hover:text-white transition-all flex items-center justify-center shadow-sm" title="Excluir Usuário">
                                                     <i class="fa-solid fa-trash text-sm"></i>
                                                 </button>
                                             <?php else: ?>
-                                                <button class="w-9 h-9 rounded-xl bg-gray-100 text-gray-400 border border-gray-200 cursor-not-allowed flex items-center justify-center" title="Acesso Restrito">
+                                                <button class="w-9 h-9 rounded-xl bg-gray-100 text-gray-400 border border-gray-200 cursor-not-allowed flex items-center justify-center shadow-sm" title="Acesso Restrito">
                                                     <i class="fa-solid fa-lock text-sm"></i>
                                                 </button>
                                             <?php endif; ?>
@@ -335,6 +346,84 @@ $lista_usuarios = $stmt->fetchAll();
 
     <script>
         const IS_MASTER_ADMIN = <?= $is_master_admin ? 'true' : 'false' ?>;
+
+        // ====================================================================
+        // SISTEMA DE PESQUISA COM REORDENAÇÃO ANIMADA E CACHE ALFABÉTICO
+        // ====================================================================
+        document.addEventListener('DOMContentLoaded', () => {
+            const tbody = document.getElementById('tabelaUsuarios');
+            if (!tbody) return;
+            
+            // "Decora" a ordem original (alfabética) logo que a página carrega
+            const originalRows = Array.from(tbody.querySelectorAll('tr'));
+            
+            // Ignora a animação se a tabela estiver vazia
+            if (originalRows.length === 0 || (originalRows.length === 1 && originalRows[0].children.length === 1)) return;
+
+            document.getElementById('inputBusca').addEventListener('input', function(e) {
+                const termo = e.target.value.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+
+                // FIRST: Guarda a posição atual de cada linha na tela antes de mexer em qualquer coisa
+                const posicoes = new Map();
+                originalRows.forEach(row => posicoes.set(row, row.getBoundingClientRect().top));
+
+                // Separar as linhas usando a ORDEM ORIGINAL para não perder a referência alfabética
+                const matches = [];
+                const nonMatches = [];
+
+                originalRows.forEach(row => {
+                    const texto = row.innerText.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+                    
+                    if (termo === '') {
+                        // Se limpou a barra, todo mundo dá "match" e volta pro lugar original
+                        matches.push(row);
+                        row.style.opacity = '1';
+                        row.style.filter = 'grayscale(0%)';
+                        row.classList.remove('bg-purple-50/70');
+                    } else if (texto.includes(termo)) {
+                        // Quem combina com a pesquisa
+                        matches.push(row);
+                        row.style.opacity = '1';
+                        row.style.filter = 'grayscale(0%)';
+                        row.classList.add('bg-purple-50/70');
+                    } else {
+                        // Quem não combina com a pesquisa
+                        nonMatches.push(row);
+                        row.style.opacity = '0.3';
+                        row.style.filter = 'grayscale(100%)';
+                        row.classList.remove('bg-purple-50/70');
+                    }
+                });
+
+                // LAST: Remonta o DOM (os matches primeiro, seguidos dos não matches)
+                matches.forEach(row => tbody.appendChild(row));
+                nonMatches.forEach(row => tbody.appendChild(row));
+
+                // INVERT & PLAY: Cria a ilusão de que a linha deslizou em vez de piscar na nova posição
+                originalRows.forEach(row => {
+                    const novaPos = row.getBoundingClientRect().top;
+                    const antigaPos = posicoes.get(row);
+                    const deltaY = antigaPos - novaPos;
+
+                    if (deltaY !== 0) {
+                        // Empurra a linha invisivelmente para onde ela estava antes
+                        row.style.transform = `translateY(${deltaY}px)`;
+                        row.style.transition = 'none';
+
+                        // Força o navegador a reconhecer essa posição velha (Reflow)
+                        row.offsetHeight;
+
+                        // Solta a "mola" para ela deslizar até a nova posição suavemente
+                        row.style.transition = 'transform 0.6s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.4s ease, filter 0.4s ease, background-color 0.4s ease';
+                        row.style.transform = '';
+                    } else {
+                        // Se não mudou de lugar, apenas suaviza o brilho/cor
+                        row.style.transition = 'opacity 0.4s ease, filter 0.4s ease, background-color 0.4s ease';
+                    }
+                });
+            });
+        });
+        // ====================================================================
 
         function mostrarNotificacao(mensagem, sucesso = true) {
             const container = document.getElementById('toast-container');

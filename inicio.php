@@ -87,12 +87,13 @@ $is_admin = (strtolower($perfil_usuario) === 'administrador');
             <div class="flex-1 p-8 lg:p-10 flex flex-wrap gap-6 lg:gap-8 content-start overflow-y-auto custom-scrollbar">
 
                 <?php if($is_admin): ?>
-                <!-- CARD: GESTÃO DE ACESSOS -->
-                <a href="gestao_acessos.php" class="group flex flex-row items-center bg-gradient-to-br from-purple-500 to-purple-700 p-5 lg:p-6 border border-white/30 rounded-[2rem] shadow-xl hover:shadow-2xl hover:shadow-purple-500/20 transition-all duration-300 hover:-translate-y-1 relative overflow-hidden w-full max-w-[25rem] min-h-[12rem]">
+                <a href="gestao_acessos.php" class="group flex flex-row items-center bg-gradient-to-br from-purple-500 to-purple-700 p-5 lg:p-6 border border-white/30 rounded-[2rem] shadow-xl hover:shadow-2xl hover:shadow-purple-500/30 transition-all duration-300 hover:-translate-y-1 relative overflow-hidden w-full max-w-[25rem] min-h-[12rem]">
                     <div class="absolute -right-10 -top-10 w-48 h-48 bg-white/10 blur-3xl rounded-full group-hover:bg-white/20 transition-all"></div>
-                    <div class="flex-shrink-0 w-24 h-24 bg-white/10 backdrop-blur-md rounded-[1.2rem] border border-white/30 shadow-[inset_0_0_20px_rgba(255,255,255,0.1)] flex items-center justify-center relative overflow-hidden mr-5 group-hover:bg-white/20 transition-all">
-                        <i class="fa-solid fa-building-lock text-[2.75rem] text-white drop-shadow-lg transform group-hover:scale-110 transition-transform duration-500"></i>
+                    
+                    <div class="flex-shrink-0 w-24 h-24 bg-white/10 backdrop-blur-md rounded-[1.2rem] border border-white/30 shadow-[inset_0_0_20px_rgba(255,255,255,0.1)] flex items-center justify-center relative overflow-hidden mr-5 group-hover:bg-white/20 transition-all text-white">
+                        <i class="fa-solid fa-building-lock text-[2.75rem] drop-shadow-lg transform group-hover:scale-110 transition-transform duration-500"></i>
                     </div>
+                    
                     <div class="flex flex-col justify-center text-left flex-1 z-10 w-full">
                         <h5 class="mb-1.5 text-xl font-extrabold tracking-tight text-white drop-shadow-sm">Gestão de Acessos</h5>
                         <p class="mb-4 text-purple-50/90 text-[12px] leading-relaxed font-medium">Administre usuários, defina senhas e controle níveis de permissão em todo o sistema.</p>
@@ -102,14 +103,15 @@ $is_admin = (strtolower($perfil_usuario) === 'administrador');
                     </div>
                 </a>
                 <?php else: ?>
-                <!-- CARD: GESTÃO DE ACESSOS (BLOQUEADO) -->
                 <button onclick="mostrarNotificacao('Acesso Negado: Este módulo é restrito para administradores do sistema.', false)" class="text-left group flex flex-row items-center bg-gradient-to-br from-purple-500 to-purple-700 p-5 lg:p-6 border border-white/30 rounded-[2rem] shadow-xl opacity-90 hover:opacity-100 transition-all duration-300 relative overflow-hidden w-full max-w-[25rem] min-h-[12rem] cursor-not-allowed">
                     <div class="absolute -right-10 -top-10 w-48 h-48 bg-white/10 blur-3xl rounded-full transition-all"></div>
-                    <div class="flex-shrink-0 w-24 h-24 bg-white/10 backdrop-blur-md rounded-[1.2rem] border border-white/30 shadow-[inset_0_0_20px_rgba(255,255,255,0.1)] flex items-center justify-center relative overflow-hidden mr-5 transition-all">
-                        <i class="fa-solid fa-building-lock text-[2.75rem] text-white/50 drop-shadow-lg grayscale"></i>
+                    
+                    <div class="flex-shrink-0 w-24 h-24 bg-white/10 backdrop-blur-md rounded-[1.2rem] border border-white/30 shadow-[inset_0_0_20px_rgba(255,255,255,0.1)] flex items-center justify-center relative overflow-hidden mr-5 transition-all text-white">
+                        <i class="fa-solid fa-building-lock text-[2.75rem] drop-shadow-lg grayscale opacity-70"></i>
                     </div>
+                    
                     <div class="flex flex-col justify-center text-left flex-1 z-10 w-full">
-                        <h5 class="mb-1.5 text-xl font-extrabold tracking-tight text-white drop-shadow-sm flex items-center">Gestão de Acessos</h5>
+                        <h5 class="mb-1.5 text-xl font-extrabold tracking-tight text-white drop-shadow-sm">Gestão de Acessos</h5>
                         <p class="mb-4 text-purple-50/90 text-[12px] leading-relaxed font-medium">Administre usuários, defina senhas e controle níveis de permissão em todo o sistema.</p>
                         <div class="inline-flex items-center justify-center w-max text-purple-800 bg-gray-200 font-bold rounded-xl text-[13px] px-4 py-2 shadow-inner pointer-events-none">
                             <i class="fa-solid fa-lock mr-2"></i> Acesso Restrito
@@ -118,75 +120,24 @@ $is_admin = (strtolower($perfil_usuario) === 'administrador');
                 </button>
                 <?php endif; ?>
 
-                <!-- CARD: ALTERAÇÃO DE SENHA -->
-                <button onclick="abrirModalSenha()" class="text-left group flex flex-row items-center bg-gradient-to-br from-amber-400 to-orange-500 p-5 lg:p-6 border border-white/30 rounded-[2rem] shadow-xl hover:shadow-2xl hover:shadow-orange-500/20 transition-all duration-300 hover:-translate-y-1 relative overflow-hidden w-full max-w-[25rem] min-h-[12rem]">
+                <a href="alteracao_senha.php" class="group flex flex-row items-center bg-gradient-to-br from-amber-400 to-orange-500 p-5 lg:p-6 border border-white/30 rounded-[2rem] shadow-xl hover:shadow-2xl hover:shadow-orange-500/30 transition-all duration-300 hover:-translate-y-1 relative overflow-hidden w-full max-w-[25rem] min-h-[12rem]">
                     <div class="absolute inset-0 bg-black/10 z-0"></div>
                     <div class="absolute -right-10 -top-10 w-48 h-48 bg-white/10 blur-3xl rounded-full group-hover:bg-white/20 transition-all z-0"></div>
+                    
                     <div class="flex-shrink-0 w-24 h-24 bg-white/10 backdrop-blur-md rounded-[1.2rem] border border-white/30 shadow-[inset_0_0_20px_rgba(255,255,255,0.1)] flex items-center justify-center relative overflow-hidden mr-5 group-hover:bg-white/20 transition-all z-10 text-white">
                         <i class="fa-solid fa-user-secret text-[2.75rem] drop-shadow-lg transform group-hover:scale-110 transition-transform duration-500"></i>
                     </div>
+                    
                     <div class="flex flex-col justify-center text-left flex-1 z-10 w-full relative">
                         <h5 class="mb-1.5 text-xl font-extrabold tracking-tight text-white drop-shadow-sm">Alteração de Senha</h5>
                         <p class="mb-4 text-orange-50/90 text-[12px] leading-relaxed font-medium">Modifique sua credencial de acesso e mantenha sua conta no portal sempre segura.</p>
-                        <div class="inline-flex items-center justify-center w-max text-orange-600 bg-white hover:bg-gray-100 hover:scale-[1.03] transition-all font-bold rounded-xl text-[13px] px-4 py-2 shadow-md relative">
+                        <button type="button" class="inline-flex items-center justify-center w-max text-orange-600 bg-white hover:bg-gray-100 hover:scale-[1.03] transition-all font-bold rounded-xl text-[13px] px-4 py-2 shadow-md relative">
                             Alterar Credencial <svg class="w-4 h-4 ml-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
-                        </div>
+                        </button>
                     </div>
-                </button>
+                </a>
 
             </div>
-            
-            <!-- MODAL ALTERAR SENHA -->
-            <div id="modalAlterarSenha" class="fixed inset-0 z-[60] flex items-center justify-center bg-black/40 backdrop-blur-sm opacity-0 pointer-events-none transition-opacity duration-300 p-4">
-                <div id="modalSenhaConteudo" class="bg-white/95 backdrop-blur-xl border border-white/50 w-full max-w-md rounded-[2rem] shadow-2xl flex flex-col transform scale-95 transition-transform duration-300 overflow-hidden relative">
-                    
-                    <div class="px-8 py-6 border-b border-purple-100/50 flex justify-between items-center shrink-0">
-                        <div class="flex items-center gap-3">
-                            <div class="w-10 h-10 rounded-full bg-orange-100 text-orange-500 flex items-center justify-center">
-                                <i class="fa-solid fa-key text-lg"></i>
-                            </div>
-                            <h3 class="text-2xl font-bold text-gray-800">Alterar Senha</h3>
-                        </div>
-                        <button onclick="fecharModalSenha()" class="text-gray-400 hover:text-red-500 transition-colors p-2 rounded-full hover:bg-red-50">
-                            <i class="fa-solid fa-xmark text-xl"></i>
-                        </button>
-                    </div>
-
-                    <div class="p-8 overflow-y-auto custom-scrollbar">
-                        <p class="text-gray-500 text-sm mb-6 text-center font-medium">Crie uma nova credencial segura para acessar o Portal GGCI.</p>
-
-                        <form id="formAlterarSenha" class="space-y-5">
-                            <div>
-                                <label class="block text-sm font-bold text-gray-700 mb-2">Senha Atual</label>
-                                <input type="password" id="senha_atual" name="senha_atual" placeholder="Digite sua senha atual" class="w-full px-4 py-3 rounded-xl border border-purple-100 bg-white text-gray-800 focus:ring-2 focus:ring-orange-400 outline-none transition-all placeholder-gray-400">
-                            </div>
-
-                            <div class="pt-2 border-t border-purple-50">
-                                <label class="block text-sm font-bold text-gray-700 mb-2">Nova Senha</label>
-                                <input type="password" id="nova_senha" name="nova_senha" placeholder="Digite a nova senha" class="w-full px-4 py-3 rounded-xl border border-purple-100 bg-white text-gray-800 focus:ring-2 focus:ring-orange-400 outline-none transition-all placeholder-gray-400">
-                                <p id="senha_dica" class="text-xs text-gray-500 mt-2 font-medium transition-colors">
-                                    <i class="fa-solid fa-circle-info mr-1"></i> Mín. 8 caracteres, 1 maiúscula, 1 número e 1 especial (@, -, etc).
-                                </p>
-                            </div>
-
-                            <div>
-                                <label class="block text-sm font-bold text-gray-700 mb-2">Confirme a Nova Senha</label>
-                                <input type="password" id="confirma_senha" name="confirma_senha" placeholder="Repita a nova senha" class="w-full px-4 py-3 rounded-xl border border-purple-100 bg-white text-gray-800 focus:ring-2 focus:ring-orange-400 outline-none transition-all placeholder-gray-400">
-                            </div>
-                        </form>
-                    </div>
-
-                    <div class="px-8 py-5 border-t border-purple-100/50 flex justify-end gap-3 bg-gray-50/50 shrink-0">
-                        <button onclick="fecharModalSenha()" type="button" class="px-6 py-2.5 rounded-xl font-bold text-gray-500 bg-white border border-purple-100 hover:bg-gray-50 hover:text-gray-800 transition-all shadow-sm">
-                            Cancelar
-                        </button>
-                        <button id="btnSalvarNovaSenha" type="button" class="px-6 py-2.5 rounded-xl font-bold text-white bg-gradient-to-r from-amber-400 to-orange-500 hover:from-amber-500 hover:to-orange-600 shadow-lg shadow-orange-500/30 hover:scale-[1.03] transition-all">
-                            Salvar Nova Senha
-                        </button>
-                    </div>
-                </div>
-            </div>
-
         </main>
     </div>
 
@@ -207,93 +158,6 @@ $is_admin = (strtolower($perfil_usuario) === 'administrador');
             setTimeout(() => { toast.classList.remove('translate-x-full', 'opacity-0'); toast.classList.add('translate-x-0', 'opacity-100'); }, 10);
             setTimeout(() => { toast.classList.remove('translate-x-0', 'opacity-100'); toast.classList.add('translate-x-full', 'opacity-0'); setTimeout(() => toast.remove(), 500); }, 4000);
         }
-
-        const modalSenha = document.getElementById('modalAlterarSenha');
-        const modalSenhaConteudo = document.getElementById('modalSenhaConteudo');
-        const formSenha = document.getElementById('formAlterarSenha');
-        const btnSalvarSenha = document.getElementById('btnSalvarNovaSenha');
-        
-        const inputNovaSenha = document.getElementById('nova_senha');
-        const dicaSenha = document.getElementById('senha_dica');
-
-        function abrirModalSenha() {
-            formSenha.reset();
-            dicaSenha.className = "text-xs text-gray-500 mt-2 font-medium transition-colors";
-            dicaSenha.innerHTML = '<i class="fa-solid fa-circle-info mr-1"></i> Mín. 8 caracteres, 1 maiúscula, 1 número e 1 especial (@, -, etc).';
-            modalSenha.classList.remove('opacity-0', 'pointer-events-none');
-            modalSenhaConteudo.classList.remove('scale-95');
-        }
-
-        function fecharModalSenha() {
-            modalSenha.classList.add('opacity-0', 'pointer-events-none');
-            modalSenhaConteudo.classList.add('scale-95');
-        }
-
-        inputNovaSenha.addEventListener('input', function() {
-            const senha = this.value;
-            const regexForte = /^(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/;
-            
-            if (senha.length === 0) {
-                dicaSenha.className = "text-xs text-gray-500 mt-2 font-medium transition-colors";
-                dicaSenha.innerHTML = '<i class="fa-solid fa-circle-info mr-1"></i> Mín. 8 caracteres, 1 maiúscula, 1 número e 1 especial (@, -, etc).';
-            } else if (regexForte.test(senha)) {
-                dicaSenha.className = "text-xs text-green-600 mt-2 font-bold transition-colors";
-                dicaSenha.innerHTML = '<i class="fa-solid fa-check-circle mr-1"></i> Senha forte e segura!';
-            } else {
-                dicaSenha.className = "text-xs text-red-500 mt-2 font-bold transition-colors";
-                dicaSenha.innerHTML = '<i class="fa-solid fa-triangle-exclamation mr-1"></i> Senha fraca. Siga as regras acima.';
-            }
-        });
-
-        btnSalvarSenha.onclick = async function(e) {
-            e.preventDefault();
-            const atual = document.getElementById('senha_atual').value;
-            const nova = inputNovaSenha.value;
-            const confirma = document.getElementById('confirma_senha').value;
-
-            if(!atual || !nova || !confirma) {
-                mostrarNotificacao("Preencha todos os campos do formulário.", false);
-                return;
-            }
-
-            if(nova !== confirma) {
-                mostrarNotificacao("A nova senha e a confirmação não batem.", false);
-                return;
-            }
-
-            const regexForte = /^(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/;
-            if (!regexForte.test(nova)) {
-                mostrarNotificacao("A nova senha não atende aos requisitos de segurança.", false);
-                return;
-            }
-
-            btnSalvarSenha.disabled = true;
-            btnSalvarSenha.innerHTML = '<i class="fa-solid fa-spinner fa-spin mr-2"></i> Salvando...';
-
-            try {
-                const formData = new FormData(formSenha);
-                const response = await fetch('alterar_senha.php', { method: 'POST', body: formData });
-                const texto = await response.text(); 
-                
-                try {
-                    const dados = JSON.parse(texto);
-                    if (dados.sucesso) {
-                        fecharModalSenha();
-                        mostrarNotificacao(dados.mensagem, true);
-                    } else {
-                        mostrarNotificacao(dados.mensagem, false);
-                    }
-                } catch (e) {
-                    mostrarNotificacao("Erro interno no servidor.", false);
-                }
-            } catch (erro) {
-                mostrarNotificacao("Falha de comunicação com a rede.", false);
-            }
-
-            btnSalvarSenha.disabled = false;
-            btnSalvarSenha.innerHTML = 'Salvar Nova Senha';
-        };
-
     </script>
 </body>
 </html>
