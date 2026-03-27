@@ -27,7 +27,7 @@ $lista_usuarios = $stmt->fetchAll();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gestão de Acessos - Portal GGCI</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script>tailwind.config = { darkMode: 'class', }</script>
+    <script>tailwind.config = { darkMode: 'class', };</script>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -46,70 +46,66 @@ $lista_usuarios = $stmt->fetchAll();
     </style>
 </head>
 
-<body class="bg-[#f8f6fb] dark:bg-gray-950 text-gray-800 dark:text-gray-200 fixed inset-0 p-4 lg:p-6 flex transition-colors duration-500 overflow-hidden">
+<body class="bg-[#f8f6fb] text-gray-800 fixed inset-0 p-4 lg:p-6 flex transition-colors duration-500 overflow-hidden">
 
     <div id="toast-container" class="fixed top-5 right-5 z-[70] flex flex-col items-end"></div>
 
-    <div class="bg-color-1 absolute top-[-15%] left-[-10%] w-[65vw] h-[65vh] bg-pink-500/70 dark:bg-pink-900/70 rounded-full blur-[140px] pointer-events-none z-0"></div>
-    <div class="bg-color-2 absolute bottom-[-15%] left-[10%] w-[60vw] h-[60vh] bg-purple-600/70 dark:bg-purple-900/75 rounded-full blur-[140px] pointer-events-none z-0"></div>
-    <div class="bg-color-3 absolute top-[-5%] right-[-10%] w-[60vw] h-[60vh] bg-yellow-400/60 dark:bg-yellow-950/60 rounded-full blur-[140px] pointer-events-none z-0"></div>
-    <div class="bg-color-4 absolute bottom-[-10%] right-[5%] w-[65vw] h-[65vh] bg-teal-400/60 dark:bg-teal-900/60 rounded-full blur-[140px] pointer-events-none z-0"></div>
+    <div class="bg-color-1 absolute top-[-15%] left-[-10%] w-[65vw] h-[65vh] bg-pink-500/70 rounded-full blur-[140px] pointer-events-none z-0"></div>
+    <div class="bg-color-2 absolute bottom-[-15%] left-[10%] w-[60vw] h-[60vh] bg-purple-600/70 rounded-full blur-[140px] pointer-events-none z-0"></div>
+    <div class="bg-color-3 absolute top-[-5%] right-[-10%] w-[60vw] h-[60vh] bg-yellow-400/60 rounded-full blur-[140px] pointer-events-none z-0"></div>
+    <div class="bg-color-4 absolute bottom-[-10%] right-[5%] w-[65vw] h-[65vh] bg-teal-400/60 rounded-full blur-[140px] pointer-events-none z-0"></div>
 
-    <div class="w-full h-full bg-white/70 dark:bg-gray-900/70 backdrop-blur-2xl border border-white/80 dark:border-gray-700/50 rounded-[2rem] shadow-2xl dark:shadow-purple-900/10 flex overflow-hidden relative z-10">
+    <div class="w-full h-full bg-white/70 backdrop-blur-2xl border border-white/80 rounded-[2rem] shadow-2xl flex overflow-hidden relative z-10">
 
-        <aside class="w-[18rem] lg:w-[20rem] flex flex-col border-r border-purple-100/50 dark:border-gray-800/50 bg-white/40 dark:bg-gray-800/30">
-            <div class="h-28 flex items-center justify-center border-b border-purple-100/50 dark:border-gray-700/50">
+        <aside class="w-[18rem] lg:w-[20rem] flex flex-col border-r border-purple-100/50 bg-white/40">
+            <div class="h-28 flex items-center justify-center border-b border-purple-100/50">
                 <img src="sources/ovg.png" alt="OVG Logo" class="h-[4.25rem] drop-shadow-md hover:scale-105 transition-transform duration-300">
             </div>
             <nav class="flex-1 px-6 py-8 space-y-2 overflow-hidden">
-                <p class="text-[13px] font-bold text-purple-700 dark:text-purple-400 uppercase tracking-widest mb-4 px-2">Navegação Principal</p>
+                <p class="text-[13px] font-bold text-purple-700 uppercase tracking-widest mb-4 px-2">Navegação Principal</p>
                 <a href="painel.php" class="flex items-center space-x-3 px-4 py-3 bg-gradient-to-r from-purple-600 to-purple-500 shadow-xl shadow-purple-500/30 text-white rounded-xl font-bold text-base transition-all hover:scale-[1.02]">
                     <i class="fa-solid fa-user-shield text-2xl w-6 text-center"></i><span>Início</span>
                 </a>
-                <a href="#" class="flex items-center space-x-4 px-4 py-3 text-gray-600 dark:text-gray-400 hover:bg-white dark:hover:bg-gray-800/50 rounded-xl font-semibold text-base transition-all hover:text-purple-600 dark:hover:text-purple-400">
-                    <i class="fa-brands fa-buffer text-2xl w-6 text-center"></i><span>Ferramentas</span>
+                <a href="#" class="flex items-center space-x-4 px-4 py-3 text-gray-600 hover:bg-white hover:shadow-sm rounded-xl font-semibold text-base transition-all hover:text-purple-600">
+                    <i class="fa-solid fa-screwdriver-wrench text-2xl w-6 text-center"></i><span>Ferramentas</span>
                 </a>
-                <a href="#" class="flex items-center space-x-4 px-4 py-3 text-gray-600 dark:text-gray-400 hover:bg-white dark:hover:bg-gray-800/50 rounded-xl font-semibold text-base transition-all hover:text-purple-600 dark:hover:text-purple-400">
+                <a href="#" class="flex items-center space-x-4 px-4 py-3 text-gray-600 hover:bg-white hover:shadow-sm rounded-xl font-semibold text-base transition-all hover:text-purple-600">
                     <i class="fa-solid fa-folder-open text-2xl w-6 text-center"></i><span>Documentações</span>
                 </a>
-                <a href="#" class="flex items-center space-x-4 px-4 py-3 text-gray-600 dark:text-gray-400 hover:bg-white dark:hover:bg-gray-800/50 rounded-xl font-semibold text-base transition-all hover:text-purple-600 dark:hover:text-purple-400">
+                <a href="#" class="flex items-center space-x-4 px-4 py-3 text-gray-600 hover:bg-white hover:shadow-sm rounded-xl font-semibold text-base transition-all hover:text-purple-600">
                     <i class="fa-solid fa-chart-pie text-2xl w-6 text-center"></i><span>Dashboards</span>
                 </a>
             </nav>
-            <div class="p-6 border-t border-purple-100/50 dark:border-gray-800/50">
-                <a href="logout.php" class="flex items-center justify-center space-x-2 w-full px-4 py-3 bg-red-50 dark:bg-red-900/20 text-red-600 dark:text-red-400 rounded-xl font-extrabold text-sm hover:bg-red-500 hover:text-white dark:hover:bg-red-600 transition-all shadow-sm">
+            <div class="p-6 border-t border-purple-100/50">
+                <a href="logout.php" class="flex items-center justify-center space-x-2 w-full px-4 py-3 bg-red-50 text-red-600 rounded-xl font-extrabold text-sm hover:bg-red-500 hover:text-white transition-all shadow-sm">
                     <i class="fa-solid fa-right-from-bracket"></i><span>SAIR DO SISTEMA</span>
                 </a>
             </div>
         </aside>
 
         <main class="flex-1 flex flex-col h-full overflow-hidden relative">
-            <header class="h-28 px-10 flex justify-between items-center border-b border-purple-100/50 dark:border-gray-800/50 bg-white/40 dark:bg-gray-900/40 backdrop-blur-md shrink-0">
+            <header class="h-28 px-10 flex justify-between items-center border-b border-purple-100/50 bg-white/40 backdrop-blur-md shrink-0">
                 <div>
-                    <h2 class="text-3xl font-extrabold text-gray-800 dark:text-white tracking-tight">Gestão de Acessos</h2>
-                    <p class="text-lg text-gray-500 dark:text-gray-400 font-medium mt-1">Controle de permissões e usuários</p>
+                    <h2 class="text-3xl font-extrabold text-gray-800 tracking-tight">Gestão de Acessos</h2>
+                    <p class="text-lg text-gray-500 font-medium mt-1">Controle de permissões e usuários</p>
                 </div>
-                <button id="btn-tema" class="p-3 bg-white/80 dark:bg-gray-800/80 shadow-md border border-purple-100 dark:border-gray-700 rounded-full text-gray-500 dark:text-gray-400 hover:text-purple-600 transition-all hover:scale-110">
-                    <svg id="icone-lua" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
-                    <svg id="icone-sol" class="hidden w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
-                </button>
             </header>
 
             <div class="flex-1 p-10 flex flex-col gap-6 overflow-y-auto custom-scrollbar">
-                <div class="flex flex-col md:flex-row justify-between items-center gap-4 bg-white/40 dark:bg-gray-800/40 backdrop-blur-md border border-white/50 dark:border-gray-700/50 p-4 rounded-2xl shadow-sm">
+                <div class="flex flex-col md:flex-row justify-between items-center gap-4 bg-white/40 backdrop-blur-md border border-white/50 p-4 rounded-2xl shadow-sm">
                     <div class="relative w-full md:w-96">
                         <i class="fa-solid fa-search absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"></i>
-                        <input type="text" placeholder="Buscar por nome, login ou email..." class="w-full pl-11 pr-4 py-3 bg-white/60 dark:bg-gray-900/60 border border-purple-100 dark:border-gray-700 rounded-xl text-sm focus:ring-2 focus:ring-purple-400 outline-none transition-all dark:text-white placeholder-gray-500">
+                        <input type="text" placeholder="Buscar por nome, login ou email..." class="w-full pl-11 pr-4 py-3 bg-white/60 border border-purple-100 rounded-xl text-sm focus:ring-2 focus:ring-purple-400 outline-none transition-all placeholder-gray-500">
                     </div>
                     <button onclick="abrirModalNovo()" class="w-full md:w-auto px-6 py-3 bg-gradient-to-r from-pink-500 to-purple-500 text-white font-bold rounded-xl shadow-lg shadow-pink-500/30 hover:scale-[1.03] transition-all flex items-center justify-center gap-2">
                         <i class="fa-solid fa-user-plus"></i> Novo Usuário
                     </button>
                 </div>
 
-                <div class="bg-white/40 dark:bg-gray-800/40 backdrop-blur-md border border-white/50 dark:border-gray-700/50 rounded-2xl shadow-sm overflow-hidden flex-1">
+                <div class="bg-white/40 backdrop-blur-md border border-white/50 rounded-2xl shadow-sm overflow-hidden flex-1">
                     <div class="overflow-x-auto h-full">
-                        <table class="w-full text-sm text-left text-gray-600 dark:text-gray-300">
-                            <thead class="text-xs uppercase bg-white/50 dark:bg-gray-900/50 border-b border-purple-100 dark:border-gray-700/50 text-purple-700 dark:text-purple-400">
+                        <table class="w-full text-sm text-left text-gray-600">
+                            <thead class="text-xs uppercase bg-white/50 border-b border-purple-100 text-purple-700">
                                 <tr>
                                     <th class="px-6 py-5 font-bold">ID</th>
                                     <th class="px-6 py-5 font-bold">Nome</th>
@@ -119,14 +115,13 @@ $lista_usuarios = $stmt->fetchAll();
                                     <th class="px-6 py-5 font-bold text-center">Ações</th>
                                 </tr>
                             </thead>
-                            <tbody class="divide-y divide-purple-100/50 dark:divide-gray-700/50">
+                            <tbody class="divide-y divide-purple-100/50">
                                 <?php if(count($lista_usuarios) > 0): ?>
                                     <?php foreach ($lista_usuarios as $u): 
                                         $is_target_master = in_array($u['usuario'], ['admin@ovg.org.br', 'ggci@ovg.org.br']);
                                         $is_target_admin = ($u['perfil'] === 'administrador');
                                         $username_only = explode('@', $u['usuario'])[0];
                                         
-                                        // RBAC: Apenas o Master Deleta. Ninguém mais.
                                         $can_edit = true;
                                         $can_delete = $is_master_admin; 
                                         
@@ -147,7 +142,7 @@ $lista_usuarios = $stmt->fetchAll();
                                             'p_dashboards' => $u['p_dashboards']
                                         ]), ENT_QUOTES, 'UTF-8');
                                     ?>
-                                    <tr class="hover:bg-white/60 dark:hover:bg-gray-700/40 transition-colors">
+                                    <tr class="hover:bg-white/60 transition-colors">
                                         <td class="px-6 py-4 font-bold"><?= $u['id'] ?></td>
                                         <td class="px-6 py-4 font-semibold capitalize"><?= htmlspecialchars(trim($u['nome'])) ?></td>
                                         <td class="px-6 py-4"><?= $username_only ?></td>
@@ -164,7 +159,7 @@ $lista_usuarios = $stmt->fetchAll();
                                                     <i class="fa-solid fa-pen text-sm"></i>
                                                 </button>
                                             <?php else: ?>
-                                                <button class="w-9 h-9 rounded-xl bg-gray-100 text-gray-400 border border-gray-200 dark:bg-gray-800 dark:border-gray-700 cursor-not-allowed flex items-center justify-center" title="Acesso Restrito">
+                                                <button class="w-9 h-9 rounded-xl bg-gray-100 text-gray-400 border border-gray-200 cursor-not-allowed flex items-center justify-center" title="Acesso Restrito">
                                                     <i class="fa-solid fa-lock text-sm"></i>
                                                 </button>
                                             <?php endif; ?>
@@ -174,7 +169,7 @@ $lista_usuarios = $stmt->fetchAll();
                                                     <i class="fa-solid fa-trash text-sm"></i>
                                                 </button>
                                             <?php else: ?>
-                                                <button class="w-9 h-9 rounded-xl bg-gray-100 text-gray-400 border border-gray-200 dark:bg-gray-800 dark:border-gray-700 cursor-not-allowed flex items-center justify-center" title="Acesso Restrito">
+                                                <button class="w-9 h-9 rounded-xl bg-gray-100 text-gray-400 border border-gray-200 cursor-not-allowed flex items-center justify-center" title="Acesso Restrito">
                                                     <i class="fa-solid fa-lock text-sm"></i>
                                                 </button>
                                             <?php endif; ?>
@@ -191,147 +186,147 @@ $lista_usuarios = $stmt->fetchAll();
                 </div>
             </div>
 
-            <div id="modalNovoUsuario" class="fixed inset-0 z-50 flex items-center justify-center bg-black/40 dark:bg-black/60 backdrop-blur-sm opacity-0 pointer-events-none transition-opacity duration-300 p-4">
-                <div id="modalConteudo" class="bg-white/95 dark:bg-gray-900/95 backdrop-blur-xl border border-white/50 dark:border-gray-700 w-full max-w-3xl rounded-[2rem] shadow-2xl flex flex-col max-h-[90vh] transform scale-95 transition-transform duration-300 overflow-hidden relative">
+            <div id="modalNovoUsuario" class="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm opacity-0 pointer-events-none transition-opacity duration-300 p-4">
+                <div id="modalConteudo" class="bg-white/95 backdrop-blur-xl border border-white/50 w-full max-w-3xl rounded-[2rem] shadow-2xl flex flex-col max-h-[90vh] transform scale-95 transition-transform duration-300 overflow-hidden relative">
                     
-                    <div class="px-8 py-6 border-b border-purple-100/50 dark:border-gray-800/50 flex justify-between items-center shrink-0">
+                    <div class="px-8 py-6 border-b border-purple-100/50 flex justify-between items-center shrink-0">
                         <div class="flex items-center gap-3">
-                            <div class="w-10 h-10 rounded-full bg-pink-100 dark:bg-pink-900/30 text-pink-500 flex items-center justify-center">
+                            <div class="w-10 h-10 rounded-full bg-pink-100 text-pink-500 flex items-center justify-center">
                                 <i class="fa-solid fa-user-gear text-lg"></i>
                             </div>
-                            <h3 id="modalTitulo" class="text-2xl font-bold text-gray-800 dark:text-white">Cadastrar Usuário</h3>
+                            <h3 id="modalTitulo" class="text-2xl font-bold text-gray-800">Cadastrar Usuário</h3>
                         </div>
-                        <button onclick="fecharModal()" class="text-gray-400 hover:text-red-500 transition-colors p-2 rounded-full hover:bg-red-50 dark:hover:bg-red-900/20"><i class="fa-solid fa-xmark text-xl"></i></button>
+                        <button onclick="fecharModal()" class="text-gray-400 hover:text-red-500 transition-colors p-2 rounded-full hover:bg-red-50"><i class="fa-solid fa-xmark text-xl"></i></button>
                     </div>
 
                     <div class="p-8 overflow-y-auto max-h-[60vh] custom-scrollbar">
-                        <p class="text-gray-500 dark:text-gray-400 text-sm mb-8 text-center font-medium">Preencha os dados abaixo e defina os acessos modulares do colaborador.</p>
+                        <p class="text-gray-500 text-sm mb-8 text-center font-medium">Preencha os dados abaixo e defina os acessos modulares do colaborador.</p>
 
                         <form id="formCadastroUsuario" class="space-y-6">
                             <input type="hidden" name="usuario_id" id="usuario_id" value="">
 
-                            <div id="opcoes_edicao" class="hidden mb-6 p-5 bg-amber-50 dark:bg-amber-900/10 border border-amber-200 dark:border-amber-800/50 rounded-2xl">
-                                <h4 class="text-sm font-bold text-amber-800 dark:text-amber-400 mb-3"><i class="fa-solid fa-triangle-exclamation"></i> Opções de Atualização</h4>
+                            <div id="opcoes_edicao" class="hidden mb-6 p-5 bg-amber-50 border border-amber-200 rounded-2xl">
+                                <h4 class="text-sm font-bold text-amber-800 mb-3"><i class="fa-solid fa-triangle-exclamation"></i> Opções de Atualização</h4>
                                 <div class="flex flex-col sm:flex-row gap-6">
                                     <label class="flex items-center gap-2 cursor-pointer">
-                                        <input type="checkbox" id="check_alterar_nome" name="alterar_nome" value="1" class="w-4 h-4 text-amber-600 bg-white border-gray-300 rounded focus:ring-amber-500 dark:bg-gray-800 dark:border-gray-600">
-                                        <span class="text-sm font-semibold text-gray-700 dark:text-gray-300">Alterar Nome Completo</span>
+                                        <input type="checkbox" id="check_alterar_nome" name="alterar_nome" value="1" class="w-4 h-4 text-amber-600 bg-white border-gray-300 rounded focus:ring-amber-500">
+                                        <span class="text-sm font-semibold text-gray-700">Alterar Nome Completo</span>
                                     </label>
                                     <label class="flex items-center gap-2 cursor-pointer">
-                                        <input type="checkbox" id="check_resetar_senha" name="resetar_senha" value="1" class="w-4 h-4 text-amber-600 bg-white border-gray-300 rounded focus:ring-amber-500 dark:bg-gray-800 dark:border-gray-600">
-                                        <span class="text-sm font-semibold text-gray-700 dark:text-gray-300">Resetar Senha para Padrão</span>
+                                        <input type="checkbox" id="check_resetar_senha" name="resetar_senha" value="1" class="w-4 h-4 text-amber-600 bg-white border-gray-300 rounded focus:ring-amber-500">
+                                        <span class="text-sm font-semibold text-gray-700">Resetar Senha para Padrão</span>
                                     </label>
                                 </div>
                             </div>
 
                             <div>
-                                <label class="block text-sm font-bold text-gray-700 dark:text-gray-300 mb-2">Nome Completo do Colaborador</label>
+                                <label class="block text-sm font-bold text-gray-700 mb-2">Nome Completo do Colaborador</label>
                                 <input type="text" name="nome_completo" id="nome_completo" required placeholder="Ex: João Alves Borges Santos" 
-                                    class="w-full px-4 py-3 rounded-xl border border-purple-100 dark:border-gray-700 bg-white dark:bg-gray-800/50 text-gray-800 dark:text-white focus:ring-2 focus:ring-purple-400 outline-none transition-all placeholder-gray-400 read-only:bg-gray-100 dark:read-only:bg-gray-900/40 read-only:text-gray-500 read-only:cursor-not-allowed capitalize">
+                                    class="w-full px-4 py-3 rounded-xl border border-purple-100 bg-white text-gray-800 focus:ring-2 focus:ring-purple-400 outline-none transition-all placeholder-gray-400 read-only:bg-gray-100 read-only:text-gray-500 read-only:cursor-not-allowed capitalize">
                             </div>
 
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-6 opacity-70">
                                 <div>
-                                    <label class="block text-sm font-bold text-gray-700 dark:text-gray-300 mb-2">E-mail Corporativo Gerado</label>
+                                    <label class="block text-sm font-bold text-gray-700 mb-2">E-mail Corporativo Gerado</label>
                                     <div class="relative">
-                                        <input type="text" id="email_preview" disabled class="w-full pl-4 pr-32 py-3 rounded-xl border border-gray-200 dark:border-gray-700 bg-gray-100 dark:bg-gray-900/50 text-gray-500 dark:text-gray-400 cursor-not-allowed">
+                                        <input type="text" id="email_preview" disabled class="w-full pl-4 pr-32 py-3 rounded-xl border border-gray-200 bg-gray-100 text-gray-500 cursor-not-allowed">
                                         <span class="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 font-bold">@ovg.org.br</span>
                                     </div>
                                 </div>
                                 <div>
-                                    <label id="lbl_senha_preview" class="block text-sm font-bold text-gray-700 dark:text-gray-300 mb-2">Senha Padrão Gerada</label>
-                                    <input type="text" id="senha_preview" disabled class="w-full px-4 py-3 rounded-xl border border-gray-200 dark:border-gray-700 bg-gray-100 dark:bg-gray-900/50 text-gray-500 dark:text-gray-400 cursor-not-allowed">
+                                    <label id="lbl_senha_preview" class="block text-sm font-bold text-gray-700 mb-2">Senha Padrão Gerada</label>
+                                    <input type="text" id="senha_preview" disabled class="w-full px-4 py-3 rounded-xl border border-gray-200 bg-gray-100 text-gray-500 cursor-not-allowed">
                                 </div>
                             </div>
-                            <p class="text-xs text-center text-purple-600 dark:text-purple-400 font-medium mt-2">
+                            <p class="text-xs text-center text-purple-600 font-medium mt-2">
                                 <i class="fa-solid fa-circle-info"></i> O login e a senha provisória são baseados no nome.
                             </p>
 
-                            <div class="h-px w-full bg-gradient-to-r from-transparent via-purple-200 dark:via-gray-700 to-transparent my-8"></div>
+                            <div class="h-px w-full bg-gradient-to-r from-transparent via-purple-200 to-transparent my-8"></div>
 
                             <div>
-                                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6 bg-pink-50/50 dark:bg-pink-900/10 p-5 rounded-2xl border border-pink-200 dark:border-pink-900/50">
+                                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6 bg-pink-50/50 p-5 rounded-2xl border border-pink-200">
                                     <div>
-                                        <h4 class="text-lg font-extrabold text-gray-800 dark:text-white flex items-center gap-2">
+                                        <h4 class="text-lg font-extrabold text-gray-800 flex items-center gap-2">
                                             <i class="fa-solid fa-crown text-pink-500"></i> Nível do Usuário
                                         </h4>
-                                        <p class="text-xs text-gray-500 dark:text-gray-400 mt-1 font-medium">Se ativo, concede acesso à <b class="text-gray-700 dark:text-gray-300">Gestão de Acessos</b> e poder irrestrito ao sistema.</p>
+                                        <p class="text-xs text-gray-500 mt-1 font-medium">Se ativo, concede acesso à <b class="text-gray-700">Gestão de Acessos</b> e poder irrestrito ao sistema.</p>
                                     </div>
-                                    <label class="inline-flex items-center cursor-pointer bg-white dark:bg-gray-800 px-4 py-2.5 rounded-xl border border-pink-100 dark:border-gray-700 shadow-sm hover:border-pink-300 transition-colors">
+                                    <label class="inline-flex items-center cursor-pointer bg-white px-4 py-2.5 rounded-xl border border-pink-100 shadow-sm hover:border-pink-300 transition-colors">
                                         <input type="checkbox" id="toggleAdminGeral" name="promover_admin" class="sr-only peer">
-                                        <div class="relative w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-gradient-to-r peer-checked:from-pink-500 peer-checked:to-purple-500"></div>
-                                        <span class="ms-3 text-sm font-bold text-gray-700 dark:text-gray-200 peer-checked:text-pink-600 dark:peer-checked:text-pink-400">Promover a Admin</span>
+                                        <div class="relative w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-gradient-to-r peer-checked:from-pink-500 peer-checked:to-purple-500"></div>
+                                        <span class="ms-3 text-sm font-bold text-gray-700 peer-checked:text-pink-600">Promover a Admin</span>
                                     </label>
                                 </div>
 
-                                <h4 class="text-base font-bold text-gray-800 dark:text-white mb-4">Acessos Modulares</h4>
+                                <h4 class="text-base font-bold text-gray-800 mb-4">Acessos Modulares</h4>
                                 <div class="space-y-3">
-                                    <div class="border border-purple-100 dark:border-gray-700/80 rounded-2xl overflow-hidden bg-white dark:bg-gray-800/30">
-                                        <div class="bg-purple-50/50 dark:bg-gray-800 px-5 py-3 border-b border-purple-100 dark:border-gray-700/80 flex items-center gap-2">
+                                    <div class="border border-purple-100 rounded-2xl overflow-hidden bg-white">
+                                        <div class="bg-purple-50/50 px-5 py-3 border-b border-purple-100 flex items-center gap-2">
                                             <i class="fa-solid fa-house text-purple-500"></i>
-                                            <span class="font-bold text-gray-700 dark:text-gray-200 text-sm">Menu: Início</span>
+                                            <span class="font-bold text-gray-700 text-sm">Menu: Início</span>
                                         </div>
                                         <div class="p-4 grid grid-cols-1 sm:grid-cols-2 gap-3">
-                                            <label class="flex items-center gap-3 p-3 rounded-xl border border-purple-200 dark:border-purple-900/50 bg-purple-50/50 dark:bg-purple-900/20 cursor-not-allowed">
+                                            <label class="flex items-center gap-3 p-3 rounded-xl border border-purple-200 bg-purple-50/50 cursor-not-allowed">
                                                 <input type="checkbox" checked disabled class="w-4 h-4 text-purple-600 bg-gray-100 border-gray-300 rounded cursor-not-allowed">
-                                                <span class="text-sm font-bold text-purple-800 dark:text-purple-300 flex items-center gap-2">
-                                                    Alteração de Senha <span class="text-[10px] bg-purple-200 dark:bg-purple-800 text-purple-700 dark:text-purple-200 px-2 py-0.5 rounded font-bold">Padrão</span>
+                                                <span class="text-sm font-bold text-purple-800 flex items-center gap-2">
+                                                    Alteração de Senha <span class="text-[10px] bg-purple-200 text-purple-700 px-2 py-0.5 rounded font-bold">Padrão</span>
                                                 </span>
                                             </label>
-                                            <label class="flex items-center gap-3 p-3 rounded-xl border border-pink-100 dark:border-gray-700 bg-gray-50/50 dark:bg-gray-800/80 cursor-not-allowed opacity-80">
+                                            <label class="flex items-center gap-3 p-3 rounded-xl border border-pink-100 bg-gray-50/50 cursor-not-allowed opacity-80">
                                                 <input type="checkbox" id="checkGestaoAcessos" class="w-4 h-4 text-pink-500 bg-gray-100 border-gray-300 rounded cursor-not-allowed" disabled>
-                                                <span class="text-sm font-semibold text-gray-500 dark:text-gray-400 flex items-center gap-2">
-                                                    Gestão de Acessos <span class="text-[10px] bg-pink-100 dark:bg-pink-900/50 text-pink-600 dark:text-pink-300 px-2 py-0.5 rounded font-bold">Somente Admin</span>
+                                                <span class="text-sm font-semibold text-gray-500 flex items-center gap-2">
+                                                    Gestão de Acessos <span class="text-[10px] bg-pink-100 text-pink-600 px-2 py-0.5 rounded font-bold">Somente Admin</span>
                                                 </span>
                                             </label>
                                         </div>
                                     </div>
 
-                                    <label class="flex items-center gap-3 px-5 py-3 border border-gray-200 dark:border-gray-700/50 rounded-2xl cursor-pointer bg-white dark:bg-gray-800/30 hover:bg-purple-50 dark:hover:bg-gray-700/50 transition-colors">
-                                        <input type="checkbox" name="p_ferramentas" id="p_ferramentas" value="1" class="w-4 h-4 text-purple-600 bg-gray-100 border-gray-300 rounded focus:ring-purple-500 dark:bg-gray-700 dark:border-gray-600">
-                                        <i class="fa-brands fa-buffer text-gray-500 dark:text-gray-400"></i><span class="font-bold text-gray-700 dark:text-gray-300 text-sm">Permitir acesso às Ferramentas</span>
+                                    <label class="flex items-center gap-3 px-5 py-3 border border-gray-200 rounded-2xl cursor-pointer bg-white hover:bg-purple-50 transition-colors">
+                                        <input type="checkbox" name="p_ferramentas" id="p_ferramentas" value="1" class="w-4 h-4 text-purple-600 bg-gray-100 border-gray-300 rounded focus:ring-purple-500">
+                                        <i class="fa-solid fa-screwdriver-wrench text-gray-500"></i><span class="font-bold text-gray-700 text-sm">Permitir acesso às Ferramentas</span>
                                     </label>
-                                    <label class="flex items-center gap-3 px-5 py-3 border border-gray-200 dark:border-gray-700/50 rounded-2xl cursor-pointer bg-white dark:bg-gray-800/30 hover:bg-purple-50 dark:hover:bg-gray-700/50 transition-colors">
-                                        <input type="checkbox" name="p_documentacoes" id="p_documentacoes" value="1" class="w-4 h-4 text-purple-600 bg-gray-100 border-gray-300 rounded focus:ring-purple-500 dark:bg-gray-700 dark:border-gray-600">
-                                        <i class="fa-solid fa-folder-open text-gray-500 dark:text-gray-400"></i><span class="font-bold text-gray-700 dark:text-gray-300 text-sm">Permitir acesso às Documentações</span>
+                                    <label class="flex items-center gap-3 px-5 py-3 border border-gray-200 rounded-2xl cursor-pointer bg-white hover:bg-purple-50 transition-colors">
+                                        <input type="checkbox" name="p_documentacoes" id="p_documentacoes" value="1" class="w-4 h-4 text-purple-600 bg-gray-100 border-gray-300 rounded focus:ring-purple-500">
+                                        <i class="fa-solid fa-folder-open text-gray-500"></i><span class="font-bold text-gray-700 text-sm">Permitir acesso às Documentações</span>
                                     </label>
-                                    <label class="flex items-center gap-3 px-5 py-3 border border-gray-200 dark:border-gray-700/50 rounded-2xl cursor-pointer bg-white dark:bg-gray-800/30 hover:bg-purple-50 dark:hover:bg-gray-700/50 transition-colors">
-                                        <input type="checkbox" name="p_dashboards" id="p_dashboards" value="1" class="w-4 h-4 text-purple-600 bg-gray-100 border-gray-300 rounded focus:ring-purple-500 dark:bg-gray-700 dark:border-gray-600">
-                                        <i class="fa-solid fa-chart-pie text-gray-500 dark:text-gray-400"></i><span class="font-bold text-gray-700 dark:text-gray-300 text-sm">Permitir acesso aos Dashboards</span>
+                                    <label class="flex items-center gap-3 px-5 py-3 border border-gray-200 rounded-2xl cursor-pointer bg-white hover:bg-purple-50 transition-colors">
+                                        <input type="checkbox" name="p_dashboards" id="p_dashboards" value="1" class="w-4 h-4 text-purple-600 bg-gray-100 border-gray-300 rounded focus:ring-purple-500">
+                                        <i class="fa-solid fa-chart-pie text-gray-500"></i><span class="font-bold text-gray-700 text-sm">Permitir acesso aos Dashboards</span>
                                     </label>
                                 </div>
                             </div>
                         </form>
                     </div>
 
-                    <div class="px-8 py-5 border-t border-purple-100/50 dark:border-gray-800/50 flex justify-end gap-3 bg-gray-50/50 dark:bg-gray-800/30 shrink-0">
-                        <button onclick="fecharModal()" type="button" class="px-6 py-2.5 rounded-xl font-bold text-gray-500 dark:text-gray-400 bg-white dark:bg-gray-800 border border-purple-100 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700 transition-all shadow-sm">Cancelar</button>
+                    <div class="px-8 py-5 border-t border-purple-100/50 flex justify-end gap-3 bg-gray-50/50 shrink-0">
+                        <button onclick="fecharModal()" type="button" class="px-6 py-2.5 rounded-xl font-bold text-gray-500 bg-white border border-purple-100 hover:bg-gray-50 transition-all shadow-sm">Cancelar</button>
                         <button id="btnSalvarUsuario" type="button" class="px-6 py-2.5 rounded-xl font-bold text-white bg-gradient-to-r from-pink-500 to-purple-500 hover:from-pink-600 hover:to-purple-600 shadow-lg shadow-pink-500/30 hover:scale-[1.03] transition-all">Salvar Acessos</button>
                     </div>
                 </div>
             </div>
 
-            <div id="modalExcluirUsuario" class="fixed inset-0 z-[60] flex items-center justify-center bg-black/40 dark:bg-black/60 backdrop-blur-sm opacity-0 pointer-events-none transition-opacity duration-300 p-4">
-                <div id="modalDeleteConteudo" class="bg-white dark:bg-gray-900 border border-red-200 dark:border-red-900 w-full max-w-lg rounded-[2rem] shadow-2xl flex flex-col transform scale-95 transition-transform duration-300 overflow-hidden relative">
+            <div id="modalExcluirUsuario" class="fixed inset-0 z-[60] flex items-center justify-center bg-black/40 backdrop-blur-sm opacity-0 pointer-events-none transition-opacity duration-300 p-4">
+                <div id="modalDeleteConteudo" class="bg-white border border-red-200 w-full max-w-lg rounded-[2rem] shadow-2xl flex flex-col transform scale-95 transition-transform duration-300 overflow-hidden relative">
                     <div class="absolute top-0 left-0 w-full h-1.5 bg-red-500"></div>
-                    <div class="px-8 py-6 border-b border-gray-100 dark:border-gray-800 flex justify-between items-center shrink-0">
+                    <div class="px-8 py-6 border-b border-gray-100 flex justify-between items-center shrink-0">
                         <div class="flex items-center gap-3">
-                            <div class="w-10 h-10 rounded-full bg-red-100 dark:bg-red-900/30 text-red-500 flex items-center justify-center">
+                            <div class="w-10 h-10 rounded-full bg-red-100 text-red-500 flex items-center justify-center">
                                 <i class="fa-solid fa-triangle-exclamation text-lg"></i>
                             </div>
-                            <h3 class="text-2xl font-bold text-gray-800 dark:text-white">Excluir Usuário</h3>
+                            <h3 class="text-2xl font-bold text-gray-800">Excluir Usuário</h3>
                         </div>
-                        <button onclick="fecharModalExclusao()" class="text-gray-400 hover:text-red-500 transition-colors p-2 rounded-full hover:bg-red-50 dark:hover:bg-red-900/20"><i class="fa-solid fa-xmark text-xl"></i></button>
+                        <button onclick="fecharModalExclusao()" class="text-gray-400 hover:text-red-500 transition-colors p-2 rounded-full hover:bg-red-50"><i class="fa-solid fa-xmark text-xl"></i></button>
                     </div>
                     <div class="p-8">
-                        <div class="bg-red-50 dark:bg-red-900/10 border border-red-100 dark:border-red-800/50 rounded-xl p-4 mb-6">
-                            <p class="text-sm text-red-800 dark:text-red-300 font-medium">Isso excluirá permanentemente o usuário e revogará todos os seus acessos ao Portal GGCI. Essa ação não pode ser desfeita.</p>
+                        <div class="bg-red-50 border border-red-100 rounded-xl p-4 mb-6">
+                            <p class="text-sm text-red-800 font-medium">Isso excluirá permanentemente o usuário e revogará todos os seus acessos ao Portal GGCI. Essa ação não pode ser desfeita.</p>
                         </div>
-                        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Para confirmar, digite <b class="text-gray-900 dark:text-white select-none" id="delete_username_display"></b> abaixo:</label>
-                        <input type="text" id="input_confirm_delete" autocomplete="off" spellcheck="false" class="w-full px-4 py-3 rounded-xl border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800/50 text-gray-800 dark:text-white focus:ring-2 focus:ring-red-400 outline-none transition-all">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Para confirmar, digite <b class="text-gray-900 select-none" id="delete_username_display"></b> abaixo:</label>
+                        <input type="text" id="input_confirm_delete" autocomplete="off" spellcheck="false" class="w-full px-4 py-3 rounded-xl border border-gray-200 bg-gray-50 text-gray-800 focus:ring-2 focus:ring-red-400 outline-none transition-all">
                     </div>
-                    <div class="px-8 py-5 border-t border-gray-100 dark:border-gray-800 flex justify-end gap-3 bg-gray-50/50 dark:bg-gray-800/30 shrink-0">
-                        <button onclick="fecharModalExclusao()" type="button" class="px-6 py-2.5 rounded-xl font-bold text-gray-500 dark:text-gray-400 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700 transition-all shadow-sm">Cancelar</button>
+                    <div class="px-8 py-5 border-t border-gray-100 flex justify-end gap-3 bg-gray-50/50 shrink-0">
+                        <button onclick="fecharModalExclusao()" type="button" class="px-6 py-2.5 rounded-xl font-bold text-gray-500 bg-white border border-gray-200 hover:bg-gray-50 transition-all shadow-sm">Cancelar</button>
                         <button id="btnConfirmDelete" type="button" disabled class="px-6 py-2.5 rounded-xl font-bold text-white bg-red-500 hover:bg-red-600 shadow-lg shadow-red-500/30 transition-all opacity-50 cursor-not-allowed">Excluir Usuário</button>
                     </div>
                 </div>
@@ -342,26 +337,17 @@ $lista_usuarios = $stmt->fetchAll();
     <script>
         const IS_MASTER_ADMIN = <?= $is_master_admin ? 'true' : 'false' ?>;
 
-        const btnTema = document.getElementById('btn-tema');
-        const iconeLua = document.getElementById('icone-lua');
-        const iconeSol = document.getElementById('icone-sol');
-        btnTema.addEventListener('click', function() {
-            document.documentElement.classList.toggle('dark');
-            iconeLua.classList.toggle('hidden');
-            iconeSol.classList.toggle('hidden');
-        });
-
         function mostrarNotificacao(mensagem, sucesso = true) {
             const container = document.getElementById('toast-container');
             container.innerHTML = ''; 
             const toast = document.createElement('div');
             const corBorda = sucesso ? 'border-purple-500' : 'border-red-500';
             const corIcone = sucesso ? 'text-purple-500' : 'text-red-500';
-            const bgIcone = sucesso ? 'bg-purple-100 dark:bg-purple-900/30' : 'bg-red-100 dark:bg-red-900/30';
+            const bgIcone = sucesso ? 'bg-purple-100' : 'bg-red-100';
             const iconeHtml = sucesso ? '<i class="fa-solid fa-check text-lg"></i>' : '<i class="fa-solid fa-triangle-exclamation text-lg"></i>';
 
-            toast.className = `bg-white dark:bg-gray-800 border-l-4 ${corBorda} shadow-2xl rounded-r-xl p-5 mb-3 flex items-center space-x-4 transform transition-all duration-500 translate-x-full opacity-0 z-[100]`;
-            toast.innerHTML = `<div class="flex-shrink-0 ${bgIcone} p-2 rounded-full w-10 h-10 flex items-center justify-center ${corIcone}">${iconeHtml}</div><div><p class="text-gray-800 dark:text-white font-semibold text-sm">${mensagem}</p></div>`;
+            toast.className = `bg-white border-l-4 ${corBorda} shadow-2xl rounded-r-xl p-5 mb-3 flex items-center space-x-4 transform transition-all duration-500 translate-x-full opacity-0 z-[100]`;
+            toast.innerHTML = `<div class="flex-shrink-0 ${bgIcone} p-2 rounded-full w-10 h-10 flex items-center justify-center ${corIcone}">${iconeHtml}</div><div><p class="text-gray-800 font-semibold text-sm">${mensagem}</p></div>`;
             container.appendChild(toast);
             
             setTimeout(() => { toast.classList.remove('translate-x-full', 'opacity-0'); toast.classList.add('translate-x-0', 'opacity-100'); }, 10);
@@ -493,7 +479,6 @@ $lista_usuarios = $stmt->fetchAll();
             formData.append('email_gerado', inputEmailPreview.value);
             formData.append('senha_gerada', inputSenhaPreview.value);
             
-            // INJEÇÃO DA CHAVINHA QUANDO ELA ESTÁ BLOQUEADA NO FRONT
             if (toggleAdminGeral.disabled && toggleAdminGeral.checked) { 
                 formData.append('promover_admin', '1'); 
             }
