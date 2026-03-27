@@ -1,22 +1,35 @@
+-- =========================================================================
+-- 1. CONFIGURAÇÃO DE SEGURANÇA E ACESSO DO PHP
+-- Define a senha do root como '12345' para bater com o seu config.php
+-- =========================================================================
+ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY '12345';
+FLUSH PRIVILEGES;
+
+-- =========================================================================
+-- 2. CRIAÇÃO DO BANCO DE DADOS
+-- =========================================================================
 CREATE DATABASE IF NOT EXISTS portal_ggci;
 USE portal_ggci;
 
-CREATE TABLE IF NOT EXISTS usuarios (
+-- =========================================================================
+-- 3. ESTRUTURA DAS TABELAS
+-- =========================================================================
+DROP TABLE IF EXISTS usuarios;
+
+CREATE TABLE usuarios (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    nome VARCHAR(50),
-    sobrenome VARCHAR(50),
-    usuario VARCHAR(100) NOT NULL UNIQUE, -- E-mail/Login
-    senha VARCHAR(255) NOT NULL,          -- Hash BCRYPT
+    nome VARCHAR(100),
+    usuario VARCHAR(100) NOT NULL UNIQUE, 
+    senha VARCHAR(255) NOT NULL,          
     perfil ENUM('administrador', 'comum') DEFAULT 'comum',
-    -- Permissões (0 = Não, 1 = Sim)
-    p_senha TINYINT(1) DEFAULT 1,
-    p_gestao TINYINT(1) DEFAULT 0,
     p_ferramentas TINYINT(1) DEFAULT 0,
     p_documentacoes TINYINT(1) DEFAULT 0,
     p_dashboards TINYINT(1) DEFAULT 0
 );
 
--- Inserindo os dois usuários padrão (Senhas criptografadas)
-INSERT INTO usuarios (nome, sobrenome, usuario, senha, perfil, p_senha, p_gestao) VALUES 
-('Administrador', 'Sistema', 'admin@ovg.org.br', '$2y$10$7R8.88VDRlndpIzP.oE69.K6G0Y1Z9jP6R1L5.w9F9k8.n2qY8eE.', 'administrador', 1, 1),
-('GGCI', 'Consulta', 'ggci.user@ovg.org.br', '$2y$10$Lp8Z.M6O8pG.GIsEclp7Uu/D/Z.KREkG5fXkH/vP/Z.KREkG5fXkH', 'comum', 0, 0);
+-- =========================================================================
+-- 4. DADOS INICIAIS (Hashes Argon2id fornecidos)
+-- =========================================================================
+INSERT INTO usuarios (nome, usuario, senha, perfil, p_ferramentas, p_documentacoes, p_dashboards) VALUES 
+('Administrador Sistema', 'admin@ovg.org.br', '$argon2id$v=19$m=32768,t=3,p=4$ODNmY2FiNmExNmE1MWYyN2QxYTYxMWJmNzI0YzMwYTY$b0vnEFA4AnXDVjUDW8iBh4P1j/7fUluy4kgErRjXLD0', 'administrador', 1, 1, 1),
+('GGCI Consulta', 'ggci@ovg.org.br', '$argon2id$v=19$m=32768,t=3,p=4$ODNmY2FiNmExNmE1MWYyN2QxYTYxMWJmNzI0YzMwYTY$0Rw8Y2genJvWxOFtFtm9oQsU04yKe+DowGR2+n9ne94', 'comum', 0, 0, 0);

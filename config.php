@@ -19,7 +19,7 @@ try {
 // FUNÇÃO DE AUTOMAÇÃO: Faz o dump do MySQL e atualiza o arquivo database.sql
 // =========================================================================
 function atualizar_backup_sql($pdo) {
-    // 1. Prepara a estrutura do banco e da tabela
+    // 1. Prepara a estrutura do banco e da tabela ATUALIZADA
     $sql_dump = "-- Backup Automático do Portal GGCI\n";
     $sql_dump .= "CREATE DATABASE IF NOT EXISTS portal_ggci;\n";
     $sql_dump .= "USE portal_ggci;\n\n";
@@ -27,13 +27,10 @@ function atualizar_backup_sql($pdo) {
     $sql_dump .= "DROP TABLE IF EXISTS usuarios;\n";
     $sql_dump .= "CREATE TABLE usuarios (\n";
     $sql_dump .= "    id INT AUTO_INCREMENT PRIMARY KEY,\n";
-    $sql_dump .= "    nome VARCHAR(50),\n";
-    $sql_dump .= "    sobrenome VARCHAR(50),\n";
+    $sql_dump .= "    nome VARCHAR(100),\n";
     $sql_dump .= "    usuario VARCHAR(100) NOT NULL UNIQUE,\n";
     $sql_dump .= "    senha VARCHAR(255) NOT NULL,\n";
     $sql_dump .= "    perfil ENUM('administrador', 'comum') DEFAULT 'comum',\n";
-    $sql_dump .= "    p_senha TINYINT(1) DEFAULT 1,\n";
-    $sql_dump .= "    p_gestao TINYINT(1) DEFAULT 0,\n";
     $sql_dump .= "    p_ferramentas TINYINT(1) DEFAULT 0,\n";
     $sql_dump .= "    p_documentacoes TINYINT(1) DEFAULT 0,\n";
     $sql_dump .= "    p_dashboards TINYINT(1) DEFAULT 0\n";
@@ -45,18 +42,17 @@ function atualizar_backup_sql($pdo) {
 
     // 3. Monta as instruções de INSERT
     if (count($usuarios) > 0) {
-        $sql_dump .= "INSERT INTO usuarios (id, nome, sobrenome, usuario, senha, perfil, p_senha, p_gestao, p_ferramentas, p_documentacoes, p_dashboards) VALUES \n";
+        $sql_dump .= "INSERT INTO usuarios (id, nome, usuario, senha, perfil, p_ferramentas, p_documentacoes, p_dashboards) VALUES \n";
         
         $linhas = [];
         foreach ($usuarios as $u) {
-            // O PDO::quote protege contra aspas simples nos nomes (ex: D'Artagnan)
+            // O PDO::quote protege contra aspas simples nos nomes
             $nome = $pdo->quote($u['nome']);
-            $sobrenome = $pdo->quote($u['sobrenome']);
             $usuario = $pdo->quote($u['usuario']);
             $senha = $pdo->quote($u['senha']); // Aqui ele vai pegar o Hash real
             $perfil = $pdo->quote($u['perfil']);
             
-            $linhas[] = "({$u['id']}, $nome, $sobrenome, $usuario, $senha, $perfil, {$u['p_senha']}, {$u['p_gestao']}, {$u['p_ferramentas']}, {$u['p_documentacoes']}, {$u['p_dashboards']})";
+            $linhas[] = "({$u['id']}, $nome, $usuario, $senha, $perfil, {$u['p_ferramentas']}, {$u['p_documentacoes']}, {$u['p_dashboards']})";
         }
         
         // Junta todas as linhas separadas por vírgula
