@@ -1,9 +1,9 @@
 <?php
 session_start();
 
-// TRAVA DE SEGURANÇA
+// TRAVA DE SEGURANÇA: Agora redireciona para inicio.php
 if (!isset($_SESSION['logado']) || $_SESSION['logado'] !== true || $_SESSION['perfil'] !== 'administrador') {
-    header('Location: painel.php');
+    header('Location: inicio.php');
     exit;
 }
 
@@ -27,7 +27,6 @@ $lista_usuarios = $stmt->fetchAll();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gestão de Acessos - Portal GGCI</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script>tailwind.config = { darkMode: 'class', };</script>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -46,7 +45,7 @@ $lista_usuarios = $stmt->fetchAll();
     </style>
 </head>
 
-<body class="bg-[#f8f6fb] text-gray-800 fixed inset-0 p-4 lg:p-6 flex transition-colors duration-500 overflow-hidden">
+<body class="bg-[#f8f6fb] text-gray-800 fixed inset-0 p-4 lg:p-6 flex overflow-hidden">
 
     <div id="toast-container" class="fixed top-5 right-5 z-[70] flex flex-col items-end"></div>
 
@@ -63,10 +62,10 @@ $lista_usuarios = $stmt->fetchAll();
             </div>
             <nav class="flex-1 px-6 py-8 space-y-2 overflow-hidden">
                 <p class="text-[13px] font-bold text-purple-700 uppercase tracking-widest mb-4 px-2">Navegação Principal</p>
-                <a href="painel.php" class="flex items-center space-x-3 px-4 py-3 bg-gradient-to-r from-purple-600 to-purple-500 shadow-xl shadow-purple-500/30 text-white rounded-xl font-bold text-base transition-all hover:scale-[1.02]">
+                <a href="inicio.php" class="flex items-center space-x-4 px-4 py-3 text-gray-600 hover:bg-white hover:shadow-sm rounded-xl font-semibold text-base transition-all hover:text-purple-600">
                     <i class="fa-solid fa-user-shield text-2xl w-6 text-center"></i><span>Início</span>
                 </a>
-                <a href="#" class="flex items-center space-x-4 px-4 py-3 text-gray-600 hover:bg-white hover:shadow-sm rounded-xl font-semibold text-base transition-all hover:text-purple-600">
+                <a href="ferramentas.php" class="flex items-center space-x-4 px-4 py-3 text-gray-600 hover:bg-white hover:shadow-sm rounded-xl font-semibold text-base transition-all hover:text-purple-600">
                     <i class="fa-solid fa-screwdriver-wrench text-2xl w-6 text-center"></i><span>Ferramentas</span>
                 </a>
                 <a href="#" class="flex items-center space-x-4 px-4 py-3 text-gray-600 hover:bg-white hover:shadow-sm rounded-xl font-semibold text-base transition-all hover:text-purple-600">

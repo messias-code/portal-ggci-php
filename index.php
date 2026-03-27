@@ -116,7 +116,8 @@
                 .then(resposta => resposta.json()) 
                 .then(dados => {
                     if (dados.sucesso === true) {
-                        window.location.href = 'painel.php';
+                        // AGORA APONTA PARA O INICIO.PHP
+                        window.location.href = 'inicio.php'; 
                     } else {
                         mostrarNotificacao(dados.mensagem);
                     }
