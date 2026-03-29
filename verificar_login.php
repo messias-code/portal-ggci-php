@@ -18,13 +18,18 @@ if ($user && password_verify($senha, $user['senha'])) {
     $_SESSION['id'] = $user['id'];
     $_SESSION['nome'] = $user['nome'];
     $_SESSION['perfil'] = $user['perfil'];
-    // Salva as permissões para usar no painel.php
+    
+    // CORREÇÃO: Salva as permissões novas corretas na sessão
     $_SESSION['p'] = [
-        'senha' => $user['p_senha'],
-        'gestao' => $user['p_gestao'],
-        'ferramentas' => $user['p_ferramentas']
+        'ferramentas' => $user['p_ferramentas'],
+        'documentacoes' => $user['p_documentacoes'],
+        'dashboards' => $user['p_dashboards']
     ];
+    
+    header('Content-Type: application/json'); // Garante que não imprima lixo no HTML
     echo json_encode(['sucesso' => true]);
 } else {
+    header('Content-Type: application/json');
     echo json_encode(['sucesso' => false, 'mensagem' => 'Usuário ou senha incorretos.']);
 }
+?>
